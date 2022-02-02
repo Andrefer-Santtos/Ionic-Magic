@@ -11,13 +11,14 @@ import { CategoriaService } from 'src/services/domain/categoria.service';
 import { ErrorInterceptorProvider } from 'src/interceptors/error-interceptor';
 import { AuthService } from 'src/services/auth.service';
 import { HttpClientModule } from '@angular/common/http';
+import { ClienteService } from 'src/services/domain/cliente.service';
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, CategoriaService, ErrorInterceptorProvider, AuthService,
-    StorageService],
+    StorageService, ClienteService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
