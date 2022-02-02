@@ -1,0 +1,7 @@
+{
+  "name": "Magic",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
