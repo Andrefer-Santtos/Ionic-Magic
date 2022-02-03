@@ -12,12 +12,13 @@ import { ErrorInterceptorProvider } from 'src/interceptors/error-interceptor';
 import { AuthService } from 'src/services/auth.service';
 import { HttpClientModule } from '@angular/common/http';
 import { ClienteService } from 'src/services/domain/cliente.service';
+import { AuthInterceptorProvider } from 'src/interceptors/auth-interceptor';
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, CategoriaService, ErrorInterceptorProvider, AuthService,
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, CategoriaService, AuthInterceptorProvider, ErrorInterceptorProvider, AuthService,
     StorageService, ClienteService],
   bootstrap: [AppComponent],
 })
