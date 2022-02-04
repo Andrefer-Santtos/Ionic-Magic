@@ -24,6 +24,16 @@ export class FolderPage {
     public auth: AuthService
   ) { }
 
+  ionViewDidEnter() {
+    this.auth.refreshToken()
+      .subscribe(response => {
+        this.auth.successfullLogin(response.headers.get('Authorization'));
+        this.router.navigate(['categorias']);
+      },
+        error => {}
+    )
+  }
+
   login() {
     this.auth.authenticate(this.creds)
       .subscribe(response => {
