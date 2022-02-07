@@ -53,4 +53,8 @@ export class FolderPage {
   ionViewWillLeave() {
     this.menuController.swipeGesture(true);
   }
+
+  signup(){
+    this.router.navigate(['signup'])
+  }
 }
