@@ -1,6 +1,5 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { MenuController } from '@ionic/angular';
+import { Component, OnInit } from '@angular/core';
+import { MenuController, NavController } from '@ionic/angular';
 import { CredenciaisDTO } from 'src/models/credenciais.dto';
 import { AuthService } from 'src/services/auth.service';
 
@@ -10,7 +9,7 @@ import { AuthService } from 'src/services/auth.service';
   templateUrl: './folder.page.html',
   styleUrls: ['./folder.page.scss'],
 })
-export class FolderPage {
+export class FolderPage implements OnInit{
   public folder: string;
 
   creds: CredenciaisDTO = {
@@ -19,16 +18,20 @@ export class FolderPage {
   };
 
   constructor(
-    private router: Router,
+    public navCtrl: NavController,
     public menuController: MenuController,
     public auth: AuthService
   ) { }
+
+  ngOnInit() {
+    this.menuController.swipeGesture(false);
+    }
 
   ionViewDidEnter() {
     this.auth.refreshToken()
       .subscribe(response => {
         this.auth.successfullLogin(response.headers.get('Authorization'));
-        this.router.navigate(['categorias']);
+        this.navCtrl.navigateRoot('categorias');
       },
         error => {}
     )
@@ -38,14 +41,14 @@ export class FolderPage {
     this.auth.authenticate(this.creds)
       .subscribe(response => {
         this.auth.successfullLogin(response.headers.get('Authorization'));
-        this.router.navigate(['categorias']);
+        this.navCtrl.navigateRoot('categorias');
       },
         error => {}
     )
   }
   
   signup() {
-    this.router.navigate(['signup']);
+    this.navCtrl.navigateRoot('signup');
   }
   
   // Desabilita o menu dentro da tela inicial

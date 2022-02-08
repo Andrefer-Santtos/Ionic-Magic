@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NavController } from '@ionic/angular';
 import { CategoriaDTO } from '../../models/categoria.dto';
 import { CategoriaService } from '../../services/domain/categoria.service';
 
@@ -12,8 +13,8 @@ export class CategoriasPage implements OnInit {
   items: CategoriaDTO[];
 
   constructor(
-    public categoriaService: CategoriaService
-  ) { }
+    public categoriaService: CategoriaService,
+    public navCtrl: NavController) { }
 
   ngOnInit() {
   }
@@ -23,6 +24,9 @@ export class CategoriasPage implements OnInit {
       this.items = response;
     },
       error => {});
+  }
 
+  showProdutos(){
+    this.navCtrl.navigateRoot('produtos');
   }
 }

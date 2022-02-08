@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavController } from '@ionic/angular';
 import { ClienteDTO } from 'src/models/cliente.dto';
 import { ClienteService } from 'src/services/domain/cliente.service';
 import { StorageService } from '../../services/storage.service';
@@ -13,7 +13,7 @@ export class ProfilePage implements OnInit {
 
   cliente: ClienteDTO;
 
-  constructor(private router: Router,
+  constructor(public navCtrl: NavController,
     public storage: StorageService,
     public clienteService: ClienteService) { }
 
@@ -27,12 +27,12 @@ export class ProfilePage implements OnInit {
       },
       error => {
         if(error.status == 403){
-          this.router.navigate(['']);
+          this.navCtrl.navigateRoot('');
         }
       });
     }
     else{
-      this.router.navigate(['']);
+      this.navCtrl.navigateRoot('');
     }
   }
 }
