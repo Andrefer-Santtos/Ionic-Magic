@@ -43,7 +43,11 @@ export class FolderPage {
         error => {}
     )
   }
-
+  
+  signup() {
+    this.router.navigate(['signup']);
+  }
+  
   // Desabilita o menu dentro da tela inicial
   ionViewWillEnter() {
     this.menuController.swipeGesture(false);
@@ -54,7 +58,4 @@ export class FolderPage {
     this.menuController.swipeGesture(true);
   }
 
-  signup(){
-    this.router.navigate(['signup'])
-  }
 }
