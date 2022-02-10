@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { NavParams } from '@ionic/angular';
+import { NavController, NavParams } from '@ionic/angular';
 import { ProdutoDTO } from 'src/models/produto.dto';
+import { CartService } from 'src/services/domain/cart.service';
 import { ProdutoService } from 'src/services/domain/produto.service';
 
 @Component({
@@ -17,7 +18,9 @@ export class ProdutoDetailPage {
   constructor(
     public produtoService: ProdutoService,
     public router: ActivatedRoute,
-    public navParams: NavParams) { }
+    public navParams: NavParams,
+    public navCtrl: NavController,
+    public cartService: CartService) { }
 
   ionViewDidEnter(){
     this.router.queryParams.subscribe(params => {
@@ -28,5 +31,10 @@ export class ProdutoDetailPage {
         this.item = response;
       },
         error => { });
+  }
+  addToCart(produto: ProdutoDTO) {
+    this.cartService.addProduto(produto);
+    console.log(produto)
+    this.navCtrl.navigateRoot('cart');
   }
 }
