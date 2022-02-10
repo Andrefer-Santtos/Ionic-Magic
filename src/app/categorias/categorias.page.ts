@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NavigationExtras } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { CategoriaDTO } from '../../models/categoria.dto';
 import { CategoriaService } from '../../services/domain/categoria.service';
@@ -26,7 +27,12 @@ export class CategoriasPage implements OnInit {
       error => {});
   }
 
-  showProdutos(){
-    this.navCtrl.navigateRoot('produtos');
+  showProdutos(categoria_id: string) {
+    let navigationExtras: NavigationExtras = {
+      queryParams: {
+        categoria_id: JSON.stringify(categoria_id)
+      }
+    }
+    this.navCtrl.navigateRoot('produtos', navigationExtras);
   }
 }

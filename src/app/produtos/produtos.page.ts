@@ -1,33 +1,38 @@
-import { Component, OnInit } from '@angular/core';
-import { NavController } from '@ionic/angular';
+import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { NavController, NavParams } from '@ionic/angular';
 import { ProdutoDTO } from 'src/models/produto.dto';
+import { ProdutoService } from 'src/services/domain/produto.service';
 
 @Component({
   selector: 'app-produtos',
   templateUrl: './produtos.page.html',
   styleUrls: ['./produtos.page.scss'],
 })
-export class ProdutosPage implements OnInit {
+export class ProdutosPage {
 
   items: ProdutoDTO[];
+  currency
 
-  constructor(public navCtrl: NavController,) { }
-
-  ngOnInit() {
-  }
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public produtoService: ProdutoService,
+    public router: ActivatedRoute) { }
 
   ionViewDidEnter(){
-    this.items = [
-      {
-        id: "1",
-        nome: 'Cartola',
-        preco: 80.99
+    this.router.queryParams.subscribe(params => {
+      this.currency = JSON.parse(params['categoria_id'])
+    })
+    this.produtoService.findByCategoria(this.currency)
+      .subscribe(response => {
+        this.items = response['content'];
       },
-      {
-        id: "2",
-        nome: 'Cartola Especial',
-        preco: 100.00
-      },
-    ]
+        error => { });
+  }
+
+  showDetail(){
+    this.navCtrl.navigateRoot('produto-detail')
   }
 }
+

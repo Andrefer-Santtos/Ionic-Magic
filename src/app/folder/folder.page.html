@@ -1,7 +1,9 @@
 <ion-content [fullscreen]="true">
 
-  <h3> Bem vindo a Magia!! </h3>
-  <img src="assets/baralho.png"/>
+  <h3> Abrakadabra! </h3>
+  <div>
+    <img class="maguin" src="assets/MAGUIN.png"/>
+  </div>
 
   <form>
     <ion-item>
@@ -14,8 +16,8 @@
       <ion-input type="password" [(ngModel)]="creds.senha" name="senha"> </ion-input>
     </ion-item>
 
-    <ion-button expand="block" (click)="login()"> Entrar </ion-button>
+    <button class="btn-grad" (click)="login()"> Entrar </button>
   </form>
 
-  <ion-button expand="block" (click)="signup()" fill="outline"> Registrar </ion-button>
+  <button class="btn-grad" (click)="signup()"> Registrar </button>
 </ion-content>
