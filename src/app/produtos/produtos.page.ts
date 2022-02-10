@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { NavController, NavParams } from '@ionic/angular';
 import { ProdutoDTO } from 'src/models/produto.dto';
 import { ProdutoService } from 'src/services/domain/produto.service';
+import { NavigationExtras } from '@angular/router';
 
 @Component({
   selector: 'app-produtos',
@@ -31,8 +32,13 @@ export class ProdutosPage {
         error => { });
   }
 
-  showDetail(){
-    this.navCtrl.navigateRoot('produto-detail')
+  showDetail(produto_id: string) {
+    let navigationExtras: NavigationExtras = {
+      queryParams: {
+        categoria_id: JSON.stringify(produto_id)
+      }
+    }
+    this.navCtrl.navigateRoot('produto-detail', navigationExtras);
   }
 }
 

@@ -15,7 +15,8 @@ export class CategoriasPage implements OnInit {
 
   constructor(
     public categoriaService: CategoriaService,
-    public navCtrl: NavController) { }
+    public navCtrl: NavController
+    ) { }
 
   ngOnInit() {
   }
