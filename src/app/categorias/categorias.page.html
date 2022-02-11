@@ -8,10 +8,13 @@
 </ion-header>
 
 <ion-content>
+  <ion-fab top right edge>
+    <button navPush="cart" ion-fab mini><ion-icon name="cart"></ion-icon></button>
+  </ion-fab>
   <ion-list>
     <ion-item button *ngFor="let item of items" (click)="showProdutos(item.id)">
       <ion-thumbnail slot="start">
-        <img src="assets/imgs/categorias/cat{{item.id}}.jpg">
+        <img src="assets/cat{{item.id}}.jpg">
       </ion-thumbnail>
       <ion-label> {{item.nome}} </ion-label>
     </ion-item>
