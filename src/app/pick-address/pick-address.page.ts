@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
+import { NavController } from '@ionic/angular';
 import { EnderecoDTO } from 'src/models/endereco.dto';
+import { ClienteService } from 'src/services/domain/cliente.service';
+import { StorageService } from 'src/services/storage.service';
 
 @Component({
   selector: 'app-pick-address',
@@ -10,27 +13,27 @@ export class PickAddressPage {
 
   items: EnderecoDTO[];
 
-  constructor() { }
+  constructor(
+    public storage: StorageService,
+    public clienteService: ClienteService,
+    public navCtrl: NavController) { }
 
   ionViewDidEnter() {
-    this.items = [
-      {
-        id: "1",
-        logradouro: "Hogwarts",
-        numero: "934",
-        complemento: "Apto Boladao",
-        bairro: "Magia pura",
-        cep: "48293822",
-        cidade: {
-          id: "1",
-          nome: "MagicCity",
-          estado: {
-            id: "1",
-            nome: "Floresta dos duendes"
-          }
+    let localUser = this.storage.getLocalUser();
+    if (localUser && localUser.email) {
+      this.clienteService.findByEmail(localUser.email)
+      .subscribe(response =>{
+        this.items = response['enderecos'];
+      },
+      error => {
+        if(error.status == 403){
+          this.navCtrl.navigateRoot('');
         }
-      }
-    ]
+      });
+    }
+    else{
+      this.navCtrl.navigateRoot('');
+    }
   }
 
 }

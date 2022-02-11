@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { ClienteDTO } from 'src/models/cliente.dto';
 import { ClienteService } from 'src/services/domain/cliente.service';
@@ -9,7 +9,7 @@ import { StorageService } from '../../services/storage.service';
   templateUrl: './profile.page.html',
   styleUrls: ['./profile.page.scss'],
 })
-export class ProfilePage implements OnInit {
+export class ProfilePage {
 
   cliente: ClienteDTO;
 
@@ -17,12 +17,12 @@ export class ProfilePage implements OnInit {
     public storage: StorageService,
     public clienteService: ClienteService) { }
 
-  ngOnInit() {
+  ionViewDidEnter() {
     let localUser = this.storage.getLocalUser();
     if (localUser && localUser.email) {
       this.clienteService.findByEmail(localUser.email)
       .subscribe(response =>{
-        this.cliente = response;
+        this.cliente = response as ClienteDTO;
 
       },
       error => {
