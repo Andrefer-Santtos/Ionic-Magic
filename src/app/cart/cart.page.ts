@@ -42,4 +42,8 @@ export class CartPage {
   goBuy() {
     this.navCtrl.navigateRoot('categorias');
   }
+
+  checkout() {
+    this.navCtrl.navigateRoot('pick-address');
+  }
 }

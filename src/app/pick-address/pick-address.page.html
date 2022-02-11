@@ -1,0 +1,16 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>PickAddress</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    Selecione um endereço
+    <button *ngFor="let item of items">
+      <h2>{{item.logradouro}},{{item.numero}}</h2>
+      <p>{{item.complemento}},{{item.bairro}} CEP {{item.cep}}</p>
+      <p>{{item.cidade.nome}},{{item.cidade.estado.nome}}</p>
+    </button>
+  </ion-list>
+</ion-content>
