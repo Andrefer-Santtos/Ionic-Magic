@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, NavigationExtras } from '@angular/router';
+import { NavController } from '@ionic/angular';
 import { PedidoDTO } from 'src/models/pedido.dto';
 
 @Component({
@@ -16,7 +17,10 @@ export class PaymentPage implements OnInit{
 
   formGroup: FormGroup;
 
-  constructor(public formBuilder: FormBuilder, public route: ActivatedRoute) {
+  constructor(
+    public formBuilder: FormBuilder,
+    public route: ActivatedRoute,
+    public navCtrl: NavController) {
     this.formGroup = this.formBuilder.group({
       numeroDeParcelas: [1, Validators.required],
       "@type": ["pagamentoComBoleto", Validators.required]
@@ -31,6 +35,11 @@ export class PaymentPage implements OnInit{
 
   nextPage() {
     this.pedido.pagamento = this.formGroup.value;
-    console.log(this.pedido)
+    let navigationExtras: NavigationExtras = {
+      queryParams: {
+        pedido: this.pedido
+      }
+    }
+    this.navCtrl.navigateRoot('order-confirmation', navigationExtras);
   }
 }
