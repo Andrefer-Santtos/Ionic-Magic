@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NavigationExtras } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { EnderecoDTO } from 'src/models/endereco.dto';
 import { PedidoDTO } from 'src/models/pedido.dto';
@@ -53,6 +54,12 @@ export class PickAddressPage {
 
   nextPage(item: EnderecoDTO) {
     this.pedido.enderecoDeEntrega = {id: item.id};
-    console.log(this.pedido)
+    
+    let navigationExtras: NavigationExtras = {
+      queryParams: {
+        pedido: JSON.stringify(this.pedido)
+      }
+    }
+    this.navCtrl.navigateRoot('payment', navigationExtras);
   }
 }
