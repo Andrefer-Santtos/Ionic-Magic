@@ -1,10 +1,12 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>OrderConfirmation</ion-title>
+    <ion-title *ngIf="codpedido">Pedido Registrado!</ion-title>
+    <ion-title *ngIf="!codpedido">OrderConfirmation</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+<div *ngIf="!codpedido">
   <ion-card>
     <ion-card-header>
       Itens do pedido
@@ -76,4 +78,18 @@
     </ion-item>
   </ion-card>
   <button (click)="checkout()">Confirmar Pedido</button>
+</div>
+
+  <div *ngIf="codpedido">
+    <ion-card>
+      <ion-card-header>
+        Seu pedido foi registrado!
+      </ion-card-header>
+      <ion-item>
+        <h2>Código do pedido: {{codpedido}}</h2>
+        <p>Verifique seu Email</p>
+      </ion-item>
+    </ion-card>
+    <button (click)="back()">Voltar</button>
+  </div>
 </ion-content>
